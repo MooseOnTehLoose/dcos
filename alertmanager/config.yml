@@ -1,17 +1,14 @@
-# The root route on which each incoming alert enters.
 route:
-  group_by: ['alertname', 'cluster', 'service']
-  group_wait: 5s
-  group_interval: 30s
-  repeat_interval: 3h 
-  # A default receiver
+  group_by: [Alertname]
+  # Send all notifications to me.
   receiver: gmail
 
 receivers:
-- name: 'gmail'
+- name: gmail
   email_configs:
-  - to: 'anthonywindebank@gmail.com'
-    smtp_smarthost: 'smtp.gmail.com:587'
-    auth_username: 'anthonywindebank@gmail.com'
-    auth_identity: 'anthonywindebank@gmail.com'
-    smtp_from: 'anthonywindebank@gmail.com'
+  - to: anthonywindebank@gmail.com
+    from: anthonywindebank@gmail.com
+    smarthost: smtp.gmail.com:587
+    auth_username: "anthonywindebank@gmail.com"
+    auth_identity: "anthonywindebank@gmail.com"
+    auth_password: <secret>
