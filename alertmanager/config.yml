@@ -1,6 +1,6 @@
 global:
   # The smarthost and SMTP sender used for mail notifications.
-  smtp_smarthost: 'workstation.dalamadur:25'
+  smtp_smarthost: '10.4.6.21:25'
   smtp_from: 'alertmanager@example.org'
 
 
