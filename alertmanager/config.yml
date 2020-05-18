@@ -1,0 +1,42 @@
+global:
+  # The smarthost and SMTP sender used for mail notifications.
+  smtp_smarthost: 'localhost:25'
+  smtp_from: 'alertmanager@example.org'
+
+
+# The directory from which notification templates are read.
+templates: 
+- '/etc/alertmanager/template/*.tmpl'
+
+# The root route on which each incoming alert enters.
+route:
+  group_by: ['alertname', 'cluster', 'service']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 3h 
+
+  # A default receiver
+  receiver: gmail
+
+
+# Inhibition rules allow to mute a set of alerts given that another alert is
+# firing.
+# We use this to mute any warning-level notifications if the same alert is 
+# already critical.
+inhibit_rules:
+- source_match:
+    severity: 'critical'
+  target_match:
+    severity: 'warning'
+  # Apply inhibition if the alertname is the same.
+  # CAUTION: 
+  #   If all label names listed in `equal` are missing 
+  #   from both the source and target alerts,
+  #   the inhibition rule will apply!
+  equal: ['alertname', 'cluster', 'service']
+
+
+receivers:
+- name: 'gmail'
+  email_configs:
+  - to: 'anthonywindebank@gmail.com'
