@@ -1,0 +1,6 @@
+- match:
+    cstype: 'notify'
+  group_by: ['alertname', 'cstype', 'host', 'instance', 'job', 'probe', 'sendto']
+  receiver: notify-receiver
+  group_wait: 0s
+  group_interval: 5m
