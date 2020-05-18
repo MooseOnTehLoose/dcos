@@ -3,6 +3,7 @@ groups:
   rules:
   - alert: ServerReboot
     expr: (node_time_seconds - node_boot_time_seconds) < (19*60) >= (5*60)
+    #This condition is true between five minutes after the server rebooting and 19 minutes, and its value is how long the server has been up (in seconds), which is handy for putting in the actual notification we get. We delay sending the alert until the server has been up for a bit so that if we're repeatedly rebooting the server while working on it, we won't get a deluge of reboot notifications; you could make this shorter if you wanted.
     labels:
       severity: page
     annotations:
