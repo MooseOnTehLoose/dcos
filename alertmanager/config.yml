@@ -2,6 +2,7 @@ global:
   # The smarthost and SMTP sender used for mail notifications.
   smtp_smarthost: 'localhost:25'
   smtp_from: 'alertmanager@example.org'
+  smtp_require_tls: false
 
 
 # The directory from which notification templates are read.
