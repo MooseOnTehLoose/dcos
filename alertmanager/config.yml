@@ -12,6 +12,6 @@ receivers:
   email_configs:
   - to: 'anthonywindebank@gmail.com'
     smtp_smarthost: 'smtp.gmail.com:587'
-	  auth_username: 'anthonywindebank@gmail.com'
+    auth_username: 'anthonywindebank@gmail.com'
     auth_identity: 'anthonywindebank@gmail.com'
     smtp_from: 'anthonywindebank@gmail.com'
