@@ -2,7 +2,7 @@ groups:
 - name: node.rules
   rules:
   - alert: ServerReboot
-    expr: (node_time_seconds - node_boot_time_seconds) < 3600
+    expr: system_time < 600
     labels:
       severity: critical
     annotations:
