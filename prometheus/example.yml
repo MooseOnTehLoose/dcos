@@ -1,12 +1,8 @@
 groups:
 - name: node.rules
   rules:
-  - alert: InstanceDown
-    expr: up{job="node"} == 0
-    for: 1m
   - alert: ServerReboot
-    expr: (node_time_seconds - node_boot_time_seconds) < (19*60) >= (5*60)
-    #This condition is true between five minutes after the server rebooting and 19 minutes, and its value is how long the server has been up (in seconds), which is handy for putting in the actual notification we get. We delay sending the alert until the server has been up for a bit so that if we're repeatedly rebooting the server while working on it, we won't get a deluge of reboot notifications; you could make this shorter if you wanted.
+    expr: (node_time_seconds - node_boot_time_seconds) < 3600
     labels:
       severity: critical
     annotations:
@@ -18,4 +14,4 @@ groups:
       severity: critical
     annotations:
       summary: "Prometheus target missing (instance {{ $labels.instance }})"
-      description: "A Prometheus target has disappeared. An exporter might be crashed.\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+      description: "A Prometheus target has disappeared. An exporter might have crashed or a host is down.\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
